@@ -10,22 +10,21 @@ pipeline {
       }
     }
 
-    stage('Proccess') {
+    stage('Test') {
       agent any
       environment {
         registry = 'davidperez01/EurekaServer'
         registryCredential = 'dockerhub'
       }
       steps {
-        echo 'Proccess'
+        echo 'Test'
+        sh 'mvn test'
       }
     }
 
     stage('Register') {
       steps {
         echo 'Register DockerHub....'
-        sh '''docker image build -t davidperez01/eurekaserver:latest .
-'''
       }
     }
 
