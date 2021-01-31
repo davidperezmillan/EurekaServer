@@ -4,19 +4,26 @@ pipeline {
     stage('Build') {
       agent any
       steps {
-        sh 'mvn clean install'
+        sh 'mvn clean -DskipTests=true'
+        sh 'mvn install -DskipTests=true'
+        echo 'Build......'
       }
     }
 
-    stage('Register DockerHUB') {
+    stage('Proccess') {
       agent any
       environment {
         registry = 'davidperez01/EurekaServer'
         registryCredential = 'dockerhub'
       }
       steps {
-        echo 'Register'
-        sh 'docker.build registry + ":$BUILD_NUMBER"'
+        echo 'Proccess'
+      }
+    }
+
+    stage('Register') {
+      steps {
+        echo 'Register DockerHub....'
       }
     }
 
