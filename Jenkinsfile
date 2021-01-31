@@ -16,6 +16,7 @@ pipeline {
       }
       steps {
         echo 'Register'
+        sh 'docker.build registry + ":$BUILD_NUMBER"'
       }
     }
 
