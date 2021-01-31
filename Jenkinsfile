@@ -24,6 +24,8 @@ pipeline {
     stage('Register') {
       steps {
         echo 'Register DockerHub....'
+        sh '''docker image build -t davidperez01/EurekaServer:latest
+'''
       }
     }
 
