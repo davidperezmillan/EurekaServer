@@ -11,7 +11,7 @@ pipeline {
     stage('Register DockerHUB') {
       agent any
       environment {
-        registry = 'docker_hub_account/repository_name'
+        registry = 'davidperez01/EurekaServer'
         registryCredential = 'dockerhub'
       }
       steps {
