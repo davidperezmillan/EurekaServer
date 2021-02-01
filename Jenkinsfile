@@ -4,9 +4,9 @@ pipeline {
     stage('Build') {
       agent any
       steps {
+        echo 'Build......'
         sh 'mvn clean -DskipTests=true'
         sh 'mvn install -DskipTests=true'
-        echo 'Build......'
       }
     }
 
