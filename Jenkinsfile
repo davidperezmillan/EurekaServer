@@ -33,6 +33,7 @@ pipeline {
     stage('Docker Register') {
       steps {
         echo 'Register Docker'
+        echo '$registry'
       }
     }
 
