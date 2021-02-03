@@ -1,10 +1,10 @@
 pipeline {
   agent any
   stages {
-    stage('Build') {
+    stage('Clean') {
       agent any
       steps {
-        echo 'Build......'
+        echo 'Clean mvn'
         sh 'mvn clean -DskipTests=true'
       }
     }
@@ -16,15 +16,16 @@ pipeline {
         registryCredential = 'dockerhub'
       }
       steps {
-        echo 'Test'
+        echo 'Test Project'
         sh 'mvn test'
       }
     }
 
-    stage('Docker Build') {
+    stage('Build & Docker') {
       steps {
-        echo 'Docker build images'
+        echo 'mvn Build'
         sh 'mvn install -DskipTests=true'
+        echo 'Docker Imagen'
         sh 'docker image build -t nonave/eureka .'
       }
     }
