@@ -2,11 +2,22 @@ pipeline {
   agent any
   stages {
     stage('Build') {
-      agent any
-      steps {
-        echo 'Build......'
-        sh 'mvn clean -DskipTests=true'
-        sh 'mvn install -DskipTests=true'
+      parallel {
+        stage('Build') {
+          agent any
+          steps {
+            echo 'Build......'
+            sh 'mvn clean -DskipTests=true'
+            sh 'mvn install -DskipTests=true'
+          }
+        }
+
+        stage('Test Docker') {
+          steps {
+            sh 'docker ps'
+          }
+        }
+
       }
     }
 
