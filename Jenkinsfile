@@ -24,6 +24,7 @@ pipeline {
 
     stage('Docker Build') {
       steps {
+        git(url: 'https://github.com/davidperezmillan/EurekaServer.git', branch: 'main')
         echo 'Docker build images'
         sh 'docker image build -t nonave/eureka .'
       }
