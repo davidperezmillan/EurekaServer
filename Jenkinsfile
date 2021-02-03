@@ -7,6 +7,7 @@ pipeline {
           agent any
           steps {
             echo 'Build......'
+            deleteDir()
             sh 'mvn clean -DskipTests=true'
             sh 'mvn install -DskipTests=true'
           }
