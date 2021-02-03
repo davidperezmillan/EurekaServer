@@ -6,7 +6,6 @@ pipeline {
       steps {
         echo 'Build......'
         sh 'mvn clean -DskipTests=true'
-        sh 'mvn install -DskipTests=true'
       }
     }
 
@@ -24,8 +23,8 @@ pipeline {
 
     stage('Docker Build') {
       steps {
-        git(url: 'https://github.com/davidperezmillan/EurekaServer.git', branch: 'main')
         echo 'Docker build images'
+        sh 'mvn install -DskipTests=true'
         sh 'docker image build -t nonave/eureka .'
       }
     }
