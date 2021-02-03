@@ -22,9 +22,15 @@ pipeline {
       }
     }
 
+    stage('Build Docker') {
+      steps {
+        echo 'BuildDockerHub....'
+      }
+    }
+
     stage('Register') {
       steps {
-        echo 'Register DockerHub....'
+        echo 'Register Docker hub'
       }
     }
 
