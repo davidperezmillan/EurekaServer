@@ -22,9 +22,16 @@ pipeline {
       }
     }
 
-    stage('Register') {
+    stage('Docker Build') {
       steps {
-        echo 'Register DockerHub....'
+        echo 'Docker build images'
+        sh 'docker image build -t nonave/eureka .'
+      }
+    }
+
+    stage('Docker Register') {
+      steps {
+        echo 'Register Docker'
       }
     }
 
