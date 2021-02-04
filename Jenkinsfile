@@ -1,6 +1,14 @@
 pipeline {
   agent any
+  environment {
+    name = 'davidperez01/eurekaserver'
+  }
   stages {
+    stage('Clone') {
+      steps {
+        git(url: 'https://github.com/davidperezmillan/EurekaServer.git', changelog: true)
+      }
+    }
     stage('Clean') {
       agent any
       steps {
@@ -39,15 +47,5 @@ pipeline {
         echo "registry: ${registry}"
       }
     }
-
-    stage('Clone') {
-      steps {
-        git(url: 'https://github.com/davidperezmillan/EurekaServer.git', changelog: true)
-      }
-    }
-
-  }
-  environment {
-    name = 'davidperez01/eurekaserver'
   }
 }
