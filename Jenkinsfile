@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-    name = 'davidperez01/zuulservice'
+    name = 'davidperez01/eurekaserver'
   }
   stages {
     stage('Clean') {
