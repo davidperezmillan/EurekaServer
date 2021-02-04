@@ -34,8 +34,8 @@ pipeline {
     stage('Docker Register') {
       agent any
       environment {
-        registry = ${name}
-        registryCredential = 'dockerhub'
+        registry = "${name}"
+        registryCredential = "dockerhub"
       }
       steps {
         echo 'Register Docker'
