@@ -1,8 +1,5 @@
 pipeline {
   agent any
-  environment {
-    name = 'davidperez01/eurekaserver'
-  }
   stages {
     stage('Clean') {
       agent any
@@ -35,7 +32,7 @@ pipeline {
       agent any
       environment {
         registry = "${name}"
-        registryCredential = "dockerhub"
+        registryCredential = 'dockerhub'
       }
       steps {
         echo 'Register Docker'
@@ -43,5 +40,14 @@ pipeline {
       }
     }
 
+    stage('Clone') {
+      steps {
+        git(url: 'https://github.com/davidperezmillan/EurekaServer.git', changelog: true)
+      }
+    }
+
+  }
+  environment {
+    name = 'davidperez01/eurekaserver'
   }
 }
