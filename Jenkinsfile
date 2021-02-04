@@ -33,9 +33,12 @@ pipeline {
     stage('Docker Register') {
       steps {
         echo 'Register Docker'
-        echo '$registry'
+        echo 'Nombre del proyecto: ${PROJECT_NAME}'
       }
     }
 
+  }
+  environment {
+    PROYECT_NAME = 'davidperez01/EurekaServer'
   }
 }
