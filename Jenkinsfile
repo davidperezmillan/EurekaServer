@@ -4,7 +4,7 @@ pipeline {
     stage('Clean') {
       agent any
       steps {
-        echo 'Clean mvn'
+        echo 'Clean mvn ${env.name}'
         sh 'mvn clean -DskipTests=true'
       }
     }
@@ -26,14 +26,14 @@ pipeline {
         echo 'mvn Build'
         sh 'mvn install -DskipTests=true'
         echo 'Docker Imagen'
-        sh 'docker image build -t ${PROJECT_NAME} .'
+        sh 'docker image build -t ${env.name} .'
       }
     }
 
     stage('Docker Register') {
       steps {
         echo 'Register Docker'
-        echo 'Nombre del proyecto: ${PROJECT_NAME}'
+        echo 'Nombre del proyecto: ${env.name}'
       }
     }
 
