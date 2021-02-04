@@ -16,5 +16,6 @@ public class DockerSpringNetflixEurekaServerApplication {
 	
 	private static void info(){
 		System.out.println("Only test blue Ocean");
+	}
 
 }
