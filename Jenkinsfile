@@ -3,9 +3,6 @@ pipeline {
   stages {
     stage('Clean') {
       agent any
-      environment {
-        name = 'davidperez01/EurekaServer'
-      }
       steps {
         echo 'Clean mvn'
         sh 'mvn clean -DskipTests=true'
