@@ -15,10 +15,6 @@ pipeline {
 
     stage('Test') {
       agent any
-      environment {
-        registry = "${name}"
-        registryCredential = 'dockerhub'
-      }
       steps {
         echo 'Test Project'
         sh 'mvn test'
@@ -26,6 +22,7 @@ pipeline {
     }
 
     stage('Build & Docker') {
+      agent any
       steps {
         echo 'mvn Build'
         sh 'mvn install -DskipTests=true'
@@ -35,6 +32,11 @@ pipeline {
     }
 
     stage('Docker Register') {
+      agent any
+      environment {
+        registry = ${name}
+        registryCredential = 'dockerhub'
+      }
       steps {
         echo 'Register Docker'
         echo "registry: ${registry}"
