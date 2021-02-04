@@ -1,19 +1,25 @@
 pipeline {
   agent any
-  
-  environment {
-    name = 'davidperez01/EurekaServer'
-  }
-  
   stages {
     stage('Clean') {
-      agent any
-        environment {
-          name = 'davidperez01/EurekaServer'
+      parallel {
+        stage('Clean') {
+          agent any
+          environment {
+            name = 'davidperez01/EurekaServer'
+          }
+          steps {
+            echo 'Clean mvn ${env.name}'
+            sh 'mvn clean -DskipTests=true'
+          }
         }
-      steps {
-        echo 'Clean mvn ${env.name}'
-        sh 'mvn clean -DskipTests=true'
+
+        stage('') {
+          steps {
+            echo '${env.name}'
+          }
+        }
+
       }
     }
 
@@ -45,5 +51,8 @@ pipeline {
       }
     }
 
+  }
+  environment {
+    name = 'davidperez01/EurekaServer'
   }
 }
