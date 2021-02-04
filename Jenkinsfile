@@ -1,9 +1,13 @@
 pipeline {
   agent any
+  environment {
+    name = 'davidperez01/zuulservice'
+  }
   stages {
     stage('Clean') {
       agent any
       steps {
+        echo "Nombre del proyecto: ${name}"
         echo 'Clean mvn'
         sh 'mvn clean -DskipTests=true'
       }
@@ -12,7 +16,7 @@ pipeline {
     stage('Test') {
       agent any
       environment {
-        registry = 'davidperez01/EurekaServer'
+        registry = "${name}"
         registryCredential = 'dockerhub'
       }
       steps {
@@ -26,19 +30,16 @@ pipeline {
         echo 'mvn Build'
         sh 'mvn install -DskipTests=true'
         echo 'Docker Imagen'
-        sh 'docker image build -t davidperez01/eurekaserver .'
+        sh "docker image build -t ${name} ."
       }
     }
 
     stage('Docker Register') {
       steps {
         echo 'Register Docker'
-        echo 'Nombre del proyecto: $name'
+        echo "registry: ${registry}"
       }
     }
 
-  }
-  environment {
-    name = 'davidperez01/eurekaserver'
   }
 }
