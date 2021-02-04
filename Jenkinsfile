@@ -1,40 +1,48 @@
 pipeline {
   agent any
+  environment {
+    name = 'davidperez01/eurekaserver'
+  }
   stages {
-    stage('Build') {
-      agent any
+    stage('Clone') {
       steps {
-        echo 'Build......'
-        sh 'mvn clean -DskipTests=true'
-        sh 'mvn install -DskipTests=true'
+        git(url: 'https://github.com/davidperezmillan/EurekaServer.git', branch: 'main', changelog: true)
       }
     }
-
+    stage('Clean') {
+      agent any
+      steps {
+        echo "Nombre del proyecto: ${name}"
+        echo 'Clean mvn'
+        sh 'mvn clean -DskipTests=true'
+      }
+    }
     stage('Test') {
       agent any
-      environment {
-        registry = 'davidperez01/EurekaServer'
-        registryCredential = 'dockerhub'
-      }
       steps {
-        echo 'Test'
+        echo 'Test Project'
         sh 'mvn test'
       }
     }
-
-    stage('Docker Build') {
+    stage('Build & Docker') {
+      agent any
       steps {
-        git(url: 'https://github.com/davidperezmillan/EurekaServer.git', branch: 'main')
-        echo 'Docker build images'
-        sh 'docker image build -t nonave/eureka .'
+        echo 'mvn Build'
+        sh 'mvn install -DskipTests=true'
+        echo 'Docker Imagen'
+        sh "docker image build -t ${name} ."
       }
     }
-
     stage('Docker Register') {
+      agent any
+      environment {
+        registry = "${name}"
+        registryCredential = 'dockerhub'
+      }
       steps {
         echo 'Register Docker'
+        echo "registry: ${registry}"
       }
     }
-
   }
 }

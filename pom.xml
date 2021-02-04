@@ -52,13 +52,13 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
+	<!--		
 			        <plugin>
           <groupId>org.eclipse.jkube</groupId>
           <artifactId>kubernetes-maven-plugin</artifactId>
           <version>1.0.1</version>
         </plugin>
-			
+			-->
 		</plugins>
 	</build>
 	<repositories>
