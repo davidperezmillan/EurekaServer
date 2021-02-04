@@ -39,6 +39,6 @@ pipeline {
 
   }
   environment {
-    PROJECT_NAME = 'davidperez01/EurekaServer'
+    name = 'davidperez01/EurekaServer'
   }
 }
