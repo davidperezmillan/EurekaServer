@@ -29,7 +29,7 @@ pipeline {
         echo 'mvn Build'
         sh 'mvn install -DskipTests=true'
         echo 'Docker Imagen'
-        sh 'docker image build -t davidperez01/EurekaServer .'
+        sh 'docker image build -t davidperez01/eurekaserver .'
       }
     }
 
@@ -42,6 +42,6 @@ pipeline {
 
   }
   environment {
-    name = 'davidperez01/EurekaServer'
+    name = 'davidperez01/eurekaserver'
   }
 }
