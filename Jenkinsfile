@@ -26,7 +26,7 @@ pipeline {
         echo 'mvn Build'
         sh 'mvn install -DskipTests=true'
         echo 'Docker Imagen'
-        sh 'docker image build -t nonave/eureka .'
+        sh 'docker image build -t ${PROJECT_NAME} .'
       }
     }
 
@@ -39,6 +39,6 @@ pipeline {
 
   }
   environment {
-    PROYECT_NAME = 'davidperez01/EurekaServer'
+    PROJECT_NAME = 'davidperez01/EurekaServer'
   }
 }
