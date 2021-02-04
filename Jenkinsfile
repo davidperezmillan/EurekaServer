@@ -1,9 +1,5 @@
 pipeline {
   agent any
-  environment {
-    PROJECT_NAME = 'davidperez01/EurekaServer'
-  }
-  
   stages {
     stage('Clean') {
       agent any
@@ -41,5 +37,8 @@ pipeline {
       }
     }
 
+  }
+  environment {
+    PROJECT_NAME = 'davidperez01/EurekaServer'
   }
 }
