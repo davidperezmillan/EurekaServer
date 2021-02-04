@@ -13,5 +13,8 @@ public class DockerSpringNetflixEurekaServerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DockerSpringNetflixEurekaServerApplication.class, args);
 	}
+	
+	private static void info(){
+		System.out.println("Only test blue Ocean");
 
 }
