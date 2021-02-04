@@ -4,6 +4,11 @@ pipeline {
     name = 'davidperez01/eurekaserver'
   }
   stages {
+    stage('Clone') {
+      steps {
+        git(url: 'https://github.com/davidperezmillan/EurekaServer.git', branch: 'main', changelog: true)
+      }
+    }
     stage('Clean') {
       agent any
       steps {
@@ -12,7 +17,6 @@ pipeline {
         sh 'mvn clean -DskipTests=true'
       }
     }
-
     stage('Test') {
       agent any
       steps {
@@ -20,7 +24,6 @@ pipeline {
         sh 'mvn test'
       }
     }
-
     stage('Build & Docker') {
       agent any
       steps {
@@ -30,7 +33,6 @@ pipeline {
         sh "docker image build -t ${name} ."
       }
     }
-
     stage('Docker Register') {
       agent any
       environment {
