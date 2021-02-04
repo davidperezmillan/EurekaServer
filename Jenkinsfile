@@ -2,24 +2,13 @@ pipeline {
   agent any
   stages {
     stage('Clean') {
-      parallel {
-        stage('Clean') {
-          agent any
-          environment {
-            name = 'davidperez01/EurekaServer'
-          }
-          steps {
-            echo 'Clean mvn ${env.name}'
-            sh 'mvn clean -DskipTests=true'
-          }
-        }
-
-        stage('') {
-          steps {
-            echo '${env.name}'
-          }
-        }
-
+      agent any
+      environment {
+        name = 'davidperez01/EurekaServer'
+      }
+      steps {
+        echo 'Clean mvn'
+        sh 'mvn clean -DskipTests=true'
       }
     }
 
@@ -40,14 +29,14 @@ pipeline {
         echo 'mvn Build'
         sh 'mvn install -DskipTests=true'
         echo 'Docker Imagen'
-        sh 'docker image build -t ${env.name} .'
+        sh 'docker image build -t davidperez01/EurekaServer .'
       }
     }
 
     stage('Docker Register') {
       steps {
         echo 'Register Docker'
-        echo 'Nombre del proyecto: ${env.name}'
+        echo 'Nombre del proyecto: $name'
       }
     }
 
